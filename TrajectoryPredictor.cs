@@ -27,10 +27,7 @@ public class TrajectoryPredictor : MonoBehaviour
     {
         SetTrajectoryVisible(true);
     }
-
-    /// <summary>
-    /// Predicts and displays the projectile's trajectory.
-    /// </summary>
+    
     public void PredictTrajectory(ProjectileProperties projectile)
     {
         Vector3 velocity = CalculateInitialVelocity(projectile);
@@ -53,9 +50,6 @@ public class TrajectoryPredictor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the visibility of the trajectory and hit marker.
-    /// </summary>
     public void SetTrajectoryVisible(bool visible)
     {
         trajectoryLine.enabled = visible;
