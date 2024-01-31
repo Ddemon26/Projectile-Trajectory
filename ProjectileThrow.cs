@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(TrajectoryPredictor))]
 public class ProjectileThrow : MonoBehaviour
@@ -14,27 +13,12 @@ public class ProjectileThrow : MonoBehaviour
     [SerializeField]
     private Transform startPosition;
 
-    [Header("Input Settings")]
-    public InputAction fireAction;
-
     private TrajectoryPredictor trajectoryPredictor;
 
     private void Awake()
     {
         trajectoryPredictor = GetComponent<TrajectoryPredictor>();
         ValidateComponents();
-    }
-
-    private void OnEnable()
-    {
-        fireAction.Enable();
-        fireAction.performed += ThrowObject;
-    }
-
-    private void OnDisable()
-    {
-        fireAction.Disable();
-        fireAction.performed -= ThrowObject;
     }
 
     private void Update()
@@ -59,7 +43,8 @@ public class ProjectileThrow : MonoBehaviour
         };
     }
 
-    private void ThrowObject(InputAction.CallbackContext context)
+    // Public method to throw the projectile
+    public void ThrowProjectile()
     {
         Rigidbody thrownObject = Instantiate(objectToThrow, startPosition.position, Quaternion.identity);
         thrownObject.AddForce(startPosition.forward * throwForce, ForceMode.Impulse);
